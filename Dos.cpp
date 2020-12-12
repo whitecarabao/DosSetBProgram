@@ -27,6 +27,7 @@ int main()
     //print2D(root);
 
    do {
+
        printf("\n -- DOS Membership System --\nPlease select a choice: \n");
        printf("[1] - Add a new downline\n[2] - Compute and Update Commissions\n[3] - Display list of downlines\n[4] - Display Dos Network Tree\n[5] - Exit\n");
        printf("\nSelection: ");
