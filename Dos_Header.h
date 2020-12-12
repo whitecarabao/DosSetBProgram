@@ -15,5 +15,6 @@ struct Node
 struct Node* newNode(int data);
 void print2DUtil(Node* root, int space);
 void print2D(Node* root);
+Node* search(Node* root, int data);
 	
 #endif // !dos_h

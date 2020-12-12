@@ -5,10 +5,9 @@ int main()
 {
     int checkExit = 0;
     int selection = 0;
-    Node* root = newNode(1);
-    root->left = newNode(2);
-    root->left->left = newNode(3);
-    /*struct Node* root = newNode(1);
+    int tmpID, tmpUpID;
+    Node* root = newNode(0);
+    //struct Node* root = newNode(1);
     root->left = newNode(2);
     root->right = newNode(3);
     root->left->left = newNode(4);
@@ -22,7 +21,7 @@ int main()
     root->right->left->left = newNode(12);
     root->right->left->right = newNode(13);
     root->right->right->left = newNode(14);
-    root->right->right->right = newNode(15);*/
+    root->right->right->right = newNode(15);
 
     //print2D(root);
 
@@ -36,7 +35,32 @@ int main()
 
        switch (selection) {
 
+       case 1: if (root->left == NULL && root->right == NULL) {
+               Node* tmpNode = newNode(1);
+               root->left = tmpNode;
+       }
+             else {
+           printf("Please enter your NEW ID number: ");
+           scanf_s("%d", &tmpID);
+           printf("\nPlease enter your UPLINE's ID Number: ");
+           scanf_s("%d", &tmpUpID);
+           
+           Node* tmpHolder = search(root, tmpUpID);
+           
+           if (tmpHolder->left == NULL) {
+               tmpHolder->left = newNode(tmpID);
+           }
+           else if (tmpHolder->left != NULL && tmpHolder == NULL) {
+               tmpHolder->right = newNode(tmpID);
+           }
+           else if (tmpHolder->left != NULL && tmpHolder->right != NULL) {
+               printf("\n -- ERROR - THIS UPLINE IS FULL - FIND ANOTHER UPLINE");
+           }
+       }
+               break;
        case 4: print2D(root);
+               break;
+
        }
 
        selection = '\0';
