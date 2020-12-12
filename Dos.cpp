@@ -5,23 +5,24 @@ int main()
 {
     int checkExit = 0;
     int selection = 0;
+    int insDone = 0;
     int tmpID, tmpUpID;
-    Node* root = newNode(0);
+    Node* root = newNode(5);
     //struct Node* root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(5);
-    root->right->left = newNode(6);
-    root->right->right = newNode(7);
-    root->left->left->left = newNode(8);
-    root->left->left->right = newNode(9);
-    root->left->right->left = newNode(10);
-    root->left->right->right = newNode(11);
-    root->right->left->left = newNode(12);
-    root->right->left->right = newNode(13);
-    root->right->right->left = newNode(14);
-    root->right->right->right = newNode(15);
+    //root->left = newNode(2);
+    //root->right = newNode(3);
+    //root->left->left = newNode(4);
+    //root->left->right = newNode(5);
+    //root->right->left = newNode(6);
+    //root->right->right = newNode(7);
+    //root->left->left->left = newNode(8);
+    //root->left->left->right = newNode(9);
+    //root->left->right->left = newNode(10);
+    //root->left->right->right = newNode(11);
+    //root->right->left->left = newNode(12);
+    //root->right->left->right = newNode(13);
+    //root->right->right->left = newNode(14);
+    //root->right->right->right = newNode(15);
 
     //print2D(root);
 
@@ -46,16 +47,22 @@ int main()
            scanf_s("%d", &tmpUpID);
            
            Node* tmpHolder = search(root, tmpUpID);
-           
-           if (tmpHolder->left == NULL) {
+           if (tmpHolder == NULL) {
+               tmpHolder = newNode(tmpID);
+               insDone = 1;
+           }
+           if (insDone != 1 && tmpHolder->left == NULL) {
                tmpHolder->left = newNode(tmpID);
+               insDone = 1;
            }
-           else if (tmpHolder->left != NULL && tmpHolder == NULL) {
+           if (insDone != 1 && tmpHolder->right == NULL) {
                tmpHolder->right = newNode(tmpID);
+               insDone = 1;
            }
-           else if (tmpHolder->left != NULL && tmpHolder->right != NULL) {
+           /*else  {
                printf("\n -- ERROR - THIS UPLINE IS FULL - FIND ANOTHER UPLINE");
-           }
+           }*/
+           insDone = 0;
        }
                break;
        case 4: print2D(root);
