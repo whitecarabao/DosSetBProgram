@@ -2,17 +2,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Dos_Header.h"
+#include <string.h>
 
 
-
-struct Node* newNode(int data)
+struct Node* newNode(char* data)
 {
     struct Node* node = (struct Node*)malloc(sizeof(struct Node));
-    node->data = data;
+    //node->data = data;
+    strcpy_s(node->data, data);
     node->left = NULL;
     node->right = NULL;
     return node;
 }
+
 
 
 void print2DUtil(Node* root, int space)
@@ -31,7 +33,7 @@ void print2DUtil(Node* root, int space)
     printf("\n");
     for (int i = COUNT; i < space; i++)
         printf("  ");
-    printf("%d", root->data);
+    printf("%s", root->data);
 
     // Process left child 
     print2DUtil(root->left, space);
@@ -50,18 +52,27 @@ void printList(Node* root){
 
 
 
-Node* search(Node* root, int data)
+Node* search(Node* root, char* data)
 {
     // Base Cases: root is null or key is present at root 
-    if (root == NULL || root->data == data)
-        return root;
+    //if (root == NULL || (strcmp(data, root->data) == 1));
+    //    return root;
 
     // Key is greater than root's key 
-    if (root->data < data)
-        return search(root->right, data);
+    //if (root->data < data)
+    //    return search(root->right, data);
 
     // Key is smaller than root's key 
-    return search(root->left, data);
+    //return search(root->left, data);
+
+    if (root == NULL)
+        return NULL;
+    else if ((strcmp(root->data, data)==0))
+        return root;
+    else {
+        Node* left = search(root->left, data);
+        return left ? left : search(root->right, data);
+    }
 }
 
 //void newMember(Node* root) {

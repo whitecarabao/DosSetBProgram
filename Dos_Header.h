@@ -1,20 +1,25 @@
 #ifndef dos_h
 #define dos_h
 #define COUNT 2
+#define MAX_CHAR 100
+#pragma warning(disable:4996)
+
+
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h> 
+#include <string.h>
 struct Node
 {
-    char data;
+    char data[MAX_CHAR];
     struct Node* left, * right;
 };
 
 
 
-struct Node* newNode(int data);
+struct Node* newNode(char* data);
 void print2DUtil(Node* root, int space);
 void print2D(Node* root);
-Node* search(Node* root, int data);
+Node* search(Node* root, char* data);
 	
 #endif // !dos_h

@@ -6,8 +6,8 @@ int main()
     int checkExit = 0;
     int selection = 0;
     int insDone = 0;
-    int tmpID, tmpUpID;
-    Node* root = newNode(5);
+    char tmpID[MAX_CHAR], tmpUpID[MAX_CHAR];
+    Node* root = newNode((char*)"DARYLL");
     //struct Node* root = newNode(1);
     //root->left = newNode(2);
     //root->right = newNode(3);
@@ -42,27 +42,39 @@ int main()
        //}
          //    else {
        {
-           printf("Please enter your NEW ID number: ");
-           scanf_s("%d", &tmpID);
-           printf("\nPlease enter your UPLINE's ID Number: ");
-           scanf_s("%d", &tmpUpID);
-           
+           printf("Please enter your NAME: ");
+           //scanf_s("%s", &tmpID);
+           getchar();
+           fgets(tmpID, 90, stdin);
+           strtok(tmpID, "\n");
+           printf("\nPlease enter your UPLINE's NAME: ");
+           //scanf_s("%s", &tmpUpID);
+           fgets(tmpUpID, 90, stdin);
+           strtok(tmpUpID, "\n");
+           getchar();
+
+
+
            Node* tmpHolder = search(root, tmpUpID);
+           printf("\nNode found in: %p", tmpHolder);
            if (tmpHolder == NULL) {
-               tmpHolder = newNode(tmpID);
+               //tmpHolder = newNode(tmpID);
+               strcpy_s(tmpHolder->data, tmpID);
                insDone = 1;
            }
-           if (insDone != 1 && tmpHolder->left == NULL && tmpHolder->data > tmpID) {
+           if (insDone != 1 && tmpHolder->left == NULL) {
+               //tmpHolder->left = newNode(tmpID);
                tmpHolder->left = newNode(tmpID);
+              // strcpy_s(tmpHolder->left->data, tmpID);
                insDone = 1;
            }
-           if (insDone != 1 && tmpHolder->right == NULL && tmpHolder->data < tmpID) {
+           if (insDone != 1 && tmpHolder->right == NULL) {
+               //tmpHolder->right = newNode(tmpID);
                tmpHolder->right = newNode(tmpID);
+              // strcpy_s(tmpHolder->right->data, tmpID);
                insDone = 1;
            }
-           /*else  {
-               printf("\n -- ERROR - THIS UPLINE IS FULL - FIND ANOTHER UPLINE");
-           }*/
+          
            insDone = 0;
        }
                break;
