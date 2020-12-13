@@ -36,11 +36,12 @@ int main()
 
        switch (selection) {
 
-       case 1: if (root->left == NULL && root->right == NULL) {
+       case 1:/* if (root->left == NULL && root->right == NULL) {
                Node* tmpNode = newNode(1);
-               root->left = tmpNode;
-       }
-             else {
+               root->left = tmpNode;*/
+       //}
+         //    else {
+       {
            printf("Please enter your NEW ID number: ");
            scanf_s("%d", &tmpID);
            printf("\nPlease enter your UPLINE's ID Number: ");
@@ -51,11 +52,11 @@ int main()
                tmpHolder = newNode(tmpID);
                insDone = 1;
            }
-           if (insDone != 1 && tmpHolder->left == NULL) {
+           if (insDone != 1 && tmpHolder->left == NULL && tmpHolder->data > tmpID) {
                tmpHolder->left = newNode(tmpID);
                insDone = 1;
            }
-           if (insDone != 1 && tmpHolder->right == NULL) {
+           if (insDone != 1 && tmpHolder->right == NULL && tmpHolder->data < tmpID) {
                tmpHolder->right = newNode(tmpID);
                insDone = 1;
            }
