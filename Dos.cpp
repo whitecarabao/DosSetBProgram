@@ -59,7 +59,8 @@ int main()
            printf("\nNode found in: %p", tmpHolder);
            if (tmpHolder == NULL) {
                //tmpHolder = newNode(tmpID);
-               strcpy_s(tmpHolder->data, tmpID);
+           //    strcpy_s(tmpHolder->data, tmpID);
+               printf("\nERROR - UPLINE NOT FOUND!");
                insDone = 1;
            }
            if (insDone != 1 && tmpHolder->left == NULL) {
@@ -79,10 +80,12 @@ int main()
        }
                break;
        case 4: print2D(root);
+           printf("\n\n\n\n\n DOS Membership Tree \n -- Press any key to continue -- ");
+           _getch();
                break;
 
        }
-
+       system("cls");
        selection = '\0';
     } while (checkExit != 1);
 

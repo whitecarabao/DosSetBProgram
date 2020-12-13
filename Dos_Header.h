@@ -1,6 +1,6 @@
 #ifndef dos_h
 #define dos_h
-#define COUNT 2
+#define COUNT 4
 #define MAX_CHAR 100
 #pragma warning(disable:4996)
 
@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>
+#include <Windows.h>
 struct Node
 {
     char data[MAX_CHAR];
