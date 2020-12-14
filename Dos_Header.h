@@ -1,6 +1,6 @@
 #ifndef dos_h
 #define dos_h
-#define COUNT 4
+#define COUNT 8
 #define MAX_CHAR 100
 #pragma warning(disable:4996)
 

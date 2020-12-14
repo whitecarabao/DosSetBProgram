@@ -46,6 +46,7 @@ int main()
            //scanf_s("%s", &tmpID);
            getchar();
            fgets(tmpID, 90, stdin);
+           getchar();
            strtok(tmpID, "\n");
            printf("\nPlease enter your UPLINE's NAME: ");
            //scanf_s("%s", &tmpUpID);
