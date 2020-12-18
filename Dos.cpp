@@ -8,6 +8,7 @@ int main()
     int insDone = 0;
     char tmpID[MAX_CHAR], tmpUpID[MAX_CHAR];
     Node* root = newNode((char*)"DARYLL");
+    root->commission = 0;
     //struct Node* root = newNode(1);
     //root->left = newNode(2);
     //root->right = newNode(3);
@@ -59,28 +60,36 @@ int main()
            Node* tmpHolder = search(root, tmpUpID);
            printf("\nNode found in: %p", tmpHolder);
            if (tmpHolder == NULL) {
-               //tmpHolder = newNode(tmpID);
-           //    strcpy_s(tmpHolder->data, tmpID);
+
                printf("\nERROR - UPLINE NOT FOUND!");
                insDone = 1;
            }
            if (insDone != 1 && tmpHolder->left == NULL) {
-               //tmpHolder->left = newNode(tmpID);
                tmpHolder->left = newNode(tmpID);
-              // strcpy_s(tmpHolder->left->data, tmpID);
+               tmpHolder->left->commission = 0;
+             //  tmpHolder->commission += 500;
                insDone = 1;
            }
            if (insDone != 1 && tmpHolder->right == NULL) {
-               //tmpHolder->right = newNode(tmpID);
                tmpHolder->right = newNode(tmpID);
-              // strcpy_s(tmpHolder->right->data, tmpID);
+               tmpHolder->right->commission = 0;
+               tmpHolder->commission += 500;
+          
+              
+               if ((strcmp(tmpHolder->data, "DARYLL")) == 0) {
+                   tmpHolder->commission -= 500;
+               }
+             
+               root->commission += 500;
+               //compUpline(root, tmpHolder->right->data);
                insDone = 1;
            }
           
+           
            insDone = 0;
        }
                break;
-       case 4: print2D(root);
+       case 4: showTree(root, 0);
            printf("\n\n\n\n\n DOS Membership Tree \n -- Press any key to continue -- ");
            _getch();
                break;
