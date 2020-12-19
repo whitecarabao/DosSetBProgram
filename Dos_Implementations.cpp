@@ -53,6 +53,15 @@ Node* search(Node* root, char* data)
     }
 }
 
+void displayDownlines(Node* root, char* data) {
+    //Node* tmpDisp = search(root, data);
+    Node* tmpRoot = search(root, data);
+    printf("\n -- Downlines and Commission Tree of Upline: %s\n\n", tmpRoot->data);
+    showTree(tmpRoot, 0);
+    printf("\n -- Press any key to return to menu --");
+    _getch();
+}
+
 int compensateUpline(Node* nodeToCheck, char* data) {
     /* Recursion termination condition */
     if (nodeToCheck == NULL)
@@ -80,6 +89,8 @@ int compensateUpline(Node* nodeToCheck, char* data) {
         return FALSE;
     }
 }
+
+
 
 void downline(Node* root, char* tmpUpID, char* tmpID) {
 
@@ -111,4 +122,25 @@ void downline(Node* root, char* tmpUpID, char* tmpID) {
 
     insDone = 0;
 }
-
+//
+//int getLevelUtil(Node* node, char* data, int level)
+//{
+//    if (node == NULL)
+//        return 0;
+//
+//    if ((strcmp(node->data, data)) == 0)
+//        return level;
+//
+//    int downlevel = getLevelUtil(node->left, data, level + 1);
+//    if (downlevel != 0)
+//        return downlevel;
+//
+//    downlevel = getLevelUtil(node->right, data, level + 1);
+//    return downlevel;
+//}
+//
+///* Returns level of given data value */
+//int getLevel(Node* node, char* data)
+//{
+//    return getLevelUtil(node, data, 1);
+//}

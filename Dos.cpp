@@ -36,9 +36,23 @@ int main()
            insDone = 0;
        }  
        break;
+       
+       case 2: 
 
-       case 3: showTree(root, 0);
-           printf("\n\n\n\n\n DOS Membership Tree \n -- Press any key to continue -- ");
+           char tmpSearch[MAX_CHAR];
+           //Node* tmpRoot = search(root, tmpSearch);
+           system("cls");
+           getchar();
+           strtok(tmpSearch, "\n");
+           printf("\nEnter name of upline (case sensitive!): ");
+           fgets(tmpSearch, 90, stdin);
+           strtok(tmpSearch, "\n");
+           displayDownlines(root, tmpSearch);
+           break;
+
+       case 3: 
+           showTree(root, 0);
+           printf("\n\n\n\n\n -- DOS Membership Tree -- \n -- Press any key to continue -- ");
            _getch();
                break;
 
