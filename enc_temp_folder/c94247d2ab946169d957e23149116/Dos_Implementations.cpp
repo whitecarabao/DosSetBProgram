@@ -67,11 +67,10 @@ int compensateUpline(Node* root, char* data) {
          of root, then root is an ancestor of num */
         root->commission += 500;
 
-        //if((strcmp(root->data, "DARYLL")==0)); //avoid double compensation
-        //root->commission -= 500;
 
-        printf("\nUPLINE - [%s] COMPENSATED\nNEW BALANCE: PHP %d ", root->data, root->commission);
-        _getch();
+
+        printf("\n\nUPLINE - [%s] COMPENSATED\nNEW BALANCE: PHP %d ", root->data, root->commission);
+        
         return TRUE;
     }
     else {
@@ -80,3 +79,35 @@ int compensateUpline(Node* root, char* data) {
         return FALSE;
     }
 }
+
+void downline(Node* root, char* tmpUpID, char* tmpID) {
+
+    int insDone = 0;
+
+    Node* tmpHolder = search(root, tmpUpID);
+    printf("\nNode found in: %p", tmpHolder);
+
+
+    if (tmpHolder == NULL) {
+
+        printf("\nERROR - UPLINE NOT FOUND!");
+        insDone = 1;
+    }
+    if (insDone != 1 && tmpHolder->left == NULL) {
+        tmpHolder->left = newNode(tmpID);
+        tmpHolder->left->commission = 0;
+        //  tmpHolder->commission += 500;
+        insDone = 1;
+    }
+    if (insDone != 1 && tmpHolder->right == NULL) {
+        tmpHolder->right = newNode(tmpID);
+        tmpHolder->right->commission = 0;
+
+        compensateUpline(root, tmpHolder->right->data);
+        _getch(); //preview compensated uplines
+        insDone = 1;
+    }
+
+    insDone = 0;
+}
+

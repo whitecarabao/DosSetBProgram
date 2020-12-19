@@ -25,4 +25,5 @@ void print2D(Node* root);
 Node* search(Node* root, char* data);
 void showTree(Node* root, int level);
 int compensateUpline(Node* root, char* data);
+void downline(Node* root, char* tmpUpID, char* tmpID);
 #endif // !dos_h

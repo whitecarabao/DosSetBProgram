@@ -53,23 +53,24 @@ Node* search(Node* root, char* data)
     }
 }
 
-int compensateUpline(Node* root, char* data) {
+int compensateUpline(Node* nodeToCheck, char* data) {
     /* Recursion termination condition */
-    if (root == NULL)
+    if (nodeToCheck == NULL)
         return FALSE;
 
-    if ((strcmp(root->data, data)) == 0)
+    if ((strcmp(nodeToCheck->data, data)) == 0)
         return TRUE;
 
-    if (compensateUpline(root->left, data) ||
-        compensateUpline(root->right, data)) {
+    if (compensateUpline(nodeToCheck->left, data) ||
+        compensateUpline(nodeToCheck->right, data)) {
         /* If num is present is any any of the two sub tree
          of root, then root is an ancestor of num */
-        root->commission += 500;
+
+        nodeToCheck->commission += 500; //compensate PHP500 to upline for successful pair
 
 
 
-        printf("\n\nUPLINE - [%s] COMPENSATED\nNEW BALANCE: PHP %d ", root->data, root->commission);
+        printf("\n\nUPLINE - [%s] COMPENSATED\nNEW BALANCE: PHP %d ", nodeToCheck->data, nodeToCheck->commission);
         
         return TRUE;
     }
@@ -79,3 +80,35 @@ int compensateUpline(Node* root, char* data) {
         return FALSE;
     }
 }
+
+void downline(Node* root, char* tmpUpID, char* tmpID) {
+
+    int insDone = 0;
+
+    Node* tmpHolder = search(root, tmpUpID);
+    printf("\nNode found in: %p", tmpHolder);
+
+
+    if (tmpHolder == NULL) {
+
+        printf("\nERROR - UPLINE NOT FOUND!");
+        insDone = 1;
+    }
+    if (insDone != 1 && tmpHolder->left == NULL) {
+        tmpHolder->left = newNode(tmpID);
+        tmpHolder->left->commission = 0;
+        //  tmpHolder->commission += 500;
+        insDone = 1;
+    }
+    if (insDone != 1 && tmpHolder->right == NULL) {
+        tmpHolder->right = newNode(tmpID);
+        tmpHolder->right->commission = 0;
+
+        compensateUpline(root, tmpHolder->right->data);
+        _getch(); //preview compensated uplines
+        insDone = 1;
+    }
+
+    insDone = 0;
+}
+
