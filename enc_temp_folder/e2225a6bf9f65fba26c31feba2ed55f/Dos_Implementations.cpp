@@ -67,10 +67,11 @@ int compensateUpline(Node* root, char* data) {
          of root, then root is an ancestor of num */
         root->commission += 500;
 
+        //if((strcmp(root->data, "DARYLL")==0)); //avoid double compensation
+        //root->commission -= 500;
 
-
-        printf("\n\nUPLINE - [%s] COMPENSATED\nNEW BALANCE: PHP %d ", root->data, root->commission);
-        
+        printf("\nUPLINE - [%s] COMPENSATED\nNEW BALANCE: PHP %d ", root->data, root->commission);
+        _getch();
         return TRUE;
     }
     else {

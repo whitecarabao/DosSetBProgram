@@ -9,19 +9,39 @@ int main()
     char tmpID[MAX_CHAR], tmpUpID[MAX_CHAR];
     Node* root = newNode((char*)"DARYLL");
     root->commission = 0;
+    //struct Node* root = newNode(1);
+    //root->left = newNode(2);
+    //root->right = newNode(3);
+    //root->left->left = newNode(4);
+    //root->left->right = newNode(5);
+    //root->right->left = newNode(6);
+    //root->right->right = newNode(7);
+    //root->left->left->left = newNode(8);
+    //root->left->left->right = newNode(9);
+    //root->left->right->left = newNode(10);
+    //root->left->right->right = newNode(11);
+    //root->right->left->left = newNode(12);
+    //root->right->left->right = newNode(13);
+    //root->right->right->left = newNode(14);
+    //root->right->right->right = newNode(15);
 
+    //print2D(root);
 
    do {
 
        printf("\n -- DOS Membership System --\nPlease select a choice: \n");
-       printf("[1] - Add a new downline\n[2] - Display list of downlines\n[3] - Display Dos Network Tree\n[5] - Exit\n");
+       printf("[1] - Add a new downline\n[2] - Compute and Update Commissions\n[3] - Display list of downlines\n[4] - Display Dos Network Tree\n[5] - Exit\n");
        printf("\nSelection: ");
        scanf_s("%d", &selection);
 
 
        switch (selection) {
 
-       case 1:
+       case 1:/* if (root->left == NULL && root->right == NULL) {
+               Node* tmpNode = newNode(1);
+               root->left = tmpNode;*/
+       //}
+         //    else {
        {
            printf("Please enter your NAME: ");
            //scanf_s("%s", &tmpID);
@@ -53,9 +73,15 @@ int main()
            if (insDone != 1 && tmpHolder->right == NULL) {
                tmpHolder->right = newNode(tmpID);
                tmpHolder->right->commission = 0;
+               //tmpHolder->commission += 500;
+          
+              
+               /*if ((strcmp(tmpHolder->data, "DARYLL")) == 0) {
+                   tmpHolder->commission -= 500;
+               }*/
              
+               //root->commission += 500;
                compensateUpline(root, tmpHolder->right->data);
-               _getch(); //preview compensated uplines
                insDone = 1;
            }
           
@@ -63,7 +89,7 @@ int main()
            insDone = 0;
        }
                break;
-       case 3: showTree(root, 0);
+       case 4: showTree(root, 0);
            printf("\n\n\n\n\n DOS Membership Tree \n -- Press any key to continue -- ");
            _getch();
                break;
