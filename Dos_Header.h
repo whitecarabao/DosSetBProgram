@@ -27,6 +27,7 @@ void showTree(Node* root, int level);
 int compensateUpline(Node* root, char* data);
 void downline(Node* root, char* tmpUpID, char* tmpID);
 void displayDownlines(Node* root, char* data);
+int checkDupe(Node* root, char* name);
 //int getLevelUtil(Node* node, char* data, int level);
 //int getLevel(Node* node, char* data);
 #endif // !dos_h

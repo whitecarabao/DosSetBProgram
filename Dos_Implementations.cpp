@@ -27,12 +27,12 @@ void showTree(Node* root, int level) {
 
     if (root == NULL) {
         padding('\t', level);
-        puts("-->");
+        puts("--> [OPEN]");
     }
     else {
         showTree(root->right, level + 1);
         padding('\t', level);
-        printf("%s - [PHP %d] \n", root->data, root->commission);
+        printf("--> %s - [PHP %d] \n", root->data, root->commission);
         showTree(root->left, level + 1);
     }
 }
@@ -53,14 +53,19 @@ Node* search(Node* root, char* data)
     }
 }
 
+
+
 void displayDownlines(Node* root, char* data) {
     //Node* tmpDisp = search(root, data);
     Node* tmpRoot = search(root, data);
-    printf("\n -- Downlines and Commission Tree of Upline: %s\n\n", tmpRoot->data);
+    system("cls");
+    printf("\n -- [Downlines and Commission Tree of Upline: %s]\n\n", tmpRoot->data);
     showTree(tmpRoot, 0);
     printf("\n -- Press any key to return to menu --");
     _getch();
 }
+
+
 
 int compensateUpline(Node* nodeToCheck, char* data) {
     /* Recursion termination condition */
@@ -95,52 +100,61 @@ int compensateUpline(Node* nodeToCheck, char* data) {
 void downline(Node* root, char* tmpUpID, char* tmpID) {
 
     int insDone = 0;
+    system("cls");
+    printf(" -------------- DOS NETWORKING CORP --------------- \n");
+    printf("\n -- UPLINE NAME: %s", tmpUpID);
+    printf("\n -- NEW MEMBER:  %s", tmpID);
+    printf("\n -- COMMISSION EARNED: ");
+    
+    if (checkDupe(root, tmpID)!= 1) { //check if dupe
+        Node* tmpHolder = search(root, tmpUpID);
+        //printf("\nNode found in: %p", tmpHolder); //diagnostics 
 
-    Node* tmpHolder = search(root, tmpUpID);
-    printf("\nNode found in: %p", tmpHolder);
 
+        if (tmpHolder == NULL) {
+            printf(" NULL - UPLINE NOT FOUND!");
+            printf("\nERROR - UPLINE NOT FOUND!");
+            insDone = 1;
+        }
+        if (insDone != 1 && tmpHolder->left == NULL) {
+            tmpHolder->left = newNode(tmpID);
+            tmpHolder->left->commission = 0;
+            printf("PHP 0");
+            printf("\n -- STATUS: REGISTERED, NOT ELIGIBLE FOR COMMISSION!\n");
+            printf("\nOne more downline, %s and you'll get PHP500 commission!\n\n", tmpHolder->data);
+            //  tmpHolder->commission += 500;
+            insDone = 1;
+        }
+        if (insDone != 1 && tmpHolder->right == NULL) {
+            printf("PHP 500");
+            tmpHolder->right = newNode(tmpID);
+            tmpHolder->right->commission = 0;
+            printf("\n -- STATUS: REGISTERED, ELIGIBLE FOR COMMISSION!\n");
+            printf("\n ---------- UPLINE COMPENSATION TABLE ----------- \n ");
+            
+            compensateUpline(root, tmpHolder->right->data);
+            _getch(); //preview compensated uplines
 
-    if (tmpHolder == NULL) {
-
-        printf("\nERROR - UPLINE NOT FOUND!");
-        insDone = 1;
+            insDone = 1;
+        }
+        _getch();
     }
-    if (insDone != 1 && tmpHolder->left == NULL) {
-        tmpHolder->left = newNode(tmpID);
-        tmpHolder->left->commission = 0;
-        //  tmpHolder->commission += 500;
-        insDone = 1;
+    else {
+        printf("\n -- Returning to menu... --\n -- Press any key to continue --\n");
+        _getch();
     }
-    if (insDone != 1 && tmpHolder->right == NULL) {
-        tmpHolder->right = newNode(tmpID);
-        tmpHolder->right->commission = 0;
-
-        compensateUpline(root, tmpHolder->right->data);
-        _getch(); //preview compensated uplines
-        insDone = 1;
-    }
-
     insDone = 0;
 }
-//
-//int getLevelUtil(Node* node, char* data, int level)
-//{
-//    if (node == NULL)
-//        return 0;
-//
-//    if ((strcmp(node->data, data)) == 0)
-//        return level;
-//
-//    int downlevel = getLevelUtil(node->left, data, level + 1);
-//    if (downlevel != 0)
-//        return downlevel;
-//
-//    downlevel = getLevelUtil(node->right, data, level + 1);
-//    return downlevel;
-//}
-//
-///* Returns level of given data value */
-//int getLevel(Node* node, char* data)
-//{
-//    return getLevelUtil(node, data, 1);
-//}
+
+int checkDupe(Node* root, char* name) {
+    Node* tmpNode = search(root, name);
+    if (tmpNode == NULL) {
+        return 0;
+    }
+    else {
+        system("cls");
+        printf("\n -- This downline already exists! --\n -- Exiting... --\n");
+        return 1;
+    }
+
+}
