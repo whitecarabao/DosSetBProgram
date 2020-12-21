@@ -61,11 +61,13 @@ int main()
            printf("\n\n      -- Press any key to continue -- ");
            _getch();
                break;
-
+        case '5':
+               exit(0);
+               break;
        }
        system("cls");
        selection = '\0';
-    } while (checkExit != 1);
+    } while (checkExit == 5);
 
 
     return 0;
