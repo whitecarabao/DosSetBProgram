@@ -29,7 +29,6 @@ int main()
 			insDone = 0;
 			break;
 		case '2': char tmpSearch[MAX_CHAR];
-			//Node* tmpRoot = search(root, tmpSearch);
 			cls(); getchar();
 			strtok(tmpSearch, "\n");
 			n(2); s(51); printf(" DOS [NETWORK TREE] ");

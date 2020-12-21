@@ -25,8 +25,6 @@ void sleep(int number);
 void prompt(int choice);
 void terminate(char answer);
 struct Node* newNode(char* data);
-void print2DUtil(Node* root, int space);
-void print2D(Node* root);
 Node* search(Node* root, char* data);
 void showTree(Node* root, int level);
 int compensateUpline(Node* root, char* data);

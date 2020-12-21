@@ -95,7 +95,6 @@ Node* search(Node* root, char* data)
 }
 
 void displayDownlines(Node* root, char* data) {
-    //Node* tmpDisp = search(root, data);
     Node* tmpRoot = search(root, data);
     cls();
     n(1); printf(" -- [Downlines and Commission Tree of Upline: %s]", tmpRoot->data); n(2);
@@ -104,15 +103,14 @@ void displayDownlines(Node* root, char* data) {
 }
 
 int compensateUpline(Node* nodeToCheck, char* data) {
-    /* Recursion termination condition */
+    //stops the recursive function
     if (nodeToCheck == NULL)
         return FALSE;
     if ((strcmp(nodeToCheck->data, data)) == 0)
         return TRUE;
     if (compensateUpline(nodeToCheck->left, data) ||
         compensateUpline(nodeToCheck->right, data)) {
-        /* If num is present is any any of the two sub tree
-         of root, then root is an ancestor of num */
+       //basically if the node is found in either left or right nodes, it is an ancestor.
 
         nodeToCheck->commission += 500; //compensate PHP500 to upline for successful pair
 
@@ -122,8 +120,7 @@ int compensateUpline(Node* nodeToCheck, char* data) {
         return TRUE;
     }
     else {
-        /* If none of the sub tree of root contains num,
-        then root is not an ancestor of num */
+      
         return FALSE;
     }
 }
@@ -139,7 +136,9 @@ void downline(Node* root, char* tmpUpID, char* tmpID) {
     if (checkDupe(root, tmpID) != 1) { //check if dupe
         Node* tmpHolder = search(root, tmpUpID);
         //printf("\nNode found in: %p", tmpHolder); //diagnostics 
-
+        if (tmpHolder->left != NULL && tmpHolder->right != NULL) {
+            printf(" PHP ZERO!\n\n   -- ERROR, THIS UPLINE IS ALREADY FULL! -- \n   -- FIND ANOTHER UPLINE AND TRY AGAIN -- \n");
+        }
         if (tmpHolder == NULL) {
             n(1); s(5); printf("NULL - UPLINE NOT FOUND!");
             n(1); s(5); printf("ERROR - UPLINE NOT FOUND!");
@@ -151,7 +150,6 @@ void downline(Node* root, char* tmpUpID, char* tmpID) {
             printf("PHP 0");
             n(1); s(5); printf("STATUS: REGISTERED, NOT ELIGIBLE FOR COMMISSION!"); n(1); sleep(1);
             n(1); s(5); printf("One more downline, %s and you'll get PHP500 commission!", tmpHolder->data); n(2);
-            //  tmpHolder->commission += 500;
             insDone = 1;
         }
         if (insDone != 1 && tmpHolder->right == NULL) {
